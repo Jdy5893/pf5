@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+body{
+  font-family: 'Pretendard-Regular';
+  font-weight: 300;
+}
+.wrap{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+/* 여백 */
+.paddingT20{
+  padding-top: 20px;
+}
+.paddingB20{
+  padding-bottom: 20px;
+}
+/* 정렬 */
+.flex{
+  display: flex;
+}
+.grid{
+  display: grid;
+}
+.block{
+  display: block;
+}
+
+/* 폰트사이즈 */
+.h1{
+  font-size: 72px;
+}
+.h2{
+  font-size: 68px;
+}
+.h3{
+  font-size: 40px;
+}
+.h4{
+  font-size: 32px;
+}
+.h5{
+  font-size: 28px;
+}
+.h6{
+  font-size: 24px;
+}
+.bold{
+  font-weight: 900;
+}

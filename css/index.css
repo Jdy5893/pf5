@@ -1,0 +1,102 @@
+/* 상단 */
+header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+header div.wrap {
+  justify-content: space-between;
+  padding-top: 20px;
+}
+header div.wrap h1{  
+  margin: 0;
+}
+header div.wrap h1 a{
+  font-size: 0;
+  background-image: url(../img/logo.png);
+  width: 216px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+header div.wrap ul.gnb {
+  align-items: center;
+  margin-right: -40px;
+}
+header div.wrap ul.gnb li {
+
+}
+header div.wrap ul.gnb li a {
+  padding: 10px 40px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+/* 타이틀 */
+#title{
+  height: 100%;
+  overflow: hidden;
+}
+#title .titleAni{
+  height: 100%;
+}
+#title .titleAni .slick-list{
+  height: 100%;
+}
+#title .titleAni .slick-list .slick-track{
+  height: 100%;
+}
+#title .titleAni .timg{
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#title .titleAni .t1{ 
+  background-image: url(../img/title1.png);
+}
+#title .titleAni .t2{  
+  background-image: url(../img/title2.jpg);
+}
+#title .titleAni .timg .wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  color: #fff;
+}
+#title .titleAni .timg .wrap h2{ 
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+#title .titleAni .timg .wrap p{
+  
+}
+
+/* 메인 */
+main{
+  
+}
+/* 베스트메뉴 */
+#bestMenu{
+  height: 100%;
+}
+#bestMenu div {
+  flex-direction: column;
+}
+#bestMenu div h2{
+  align-self: center;
+}
+#bestMenu div ul{
+  
+}
+#bestMenu div ul li{
+  
+}
+#bestMenu div ul li a{
+  
+}
