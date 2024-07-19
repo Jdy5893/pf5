@@ -6,11 +6,16 @@
     <title>Fred Pizza</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- 구글폰트 -->
+    <!-- 폰트 -->
 
+    <link href="https://fonts.cdnfonts.com/css/mont?styles=21818,21819" rel="stylesheet">
+                
+                
     <!-- 슬릭 -->
     <script src="js/jquery-3.7.1.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -30,13 +35,30 @@
                 arrows: true,
                 fade: false
             });
-            
+            //슬릭버튼 위치 이동
+            $("#title .titleAni button").wrapAll("<div class='wbutton'></div>");
+
+            $(".menuAni").slick({
+                slidesToShow: 4.3,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                dots: false,
+                infinite: true,
+                speed: 1500,
+                cssEase: 'ease-out',
+                arrows: true,
+                fade: false
+            });
+
+
         });
     </script>
     
 
 </head>
 <body>
+    <!-- 상단영역 -->
     <header>
         <div class="wrap flex">
             <h1><a href="" class="block">FRED PIZZA</a></h1>
@@ -49,6 +71,7 @@
             </ul>
         </div>
     </header>
+    <!-- 타이틀 영역 -->
     <div id="title">
         <div class="titleAni">
             <div class="timg t1">
@@ -77,89 +100,121 @@
             </div>
         </div>
     </div>
+    <!-- 메인 영역 -->
+     <!-- 베스트메뉴 -->
     <section id="bestMenu">
-        <div class="flex">
+        <div class="menu flex">
             <h2 class="h2">Fred Best Menu</h2>
-            <ul>
-                <li>
+            <ul class="menuAni">
+                <li class="m m1">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>바질버터관자피자</h3>
+                        <img src="img/m1.png" alt="">
+                        <h3 class="h4">바질버터관자피자</h3>
                         <p>Basil Butter Scallop Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m2">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>하와이안피자</h3>
+                        <img src="img/m2.png" alt="">
+                        <h3 class="h4">하와이안피자</h3>
                         <p>Hawaiian Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m3">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>쿼터치즈벅피자</h3>
+                        <img src="img/m3.jpg" alt="">
+                        <h3 class="h4">쿼터치즈벅피자</h3>
                         <p>Quater Cheesebuck Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m4">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>갈릭쉬림플렉스피자</h3>
+                        <img src="img/m4.png" alt="">
+                        <h3 class="h4">갈릭쉬림플렉스피자</h3>
                         <p>Garlic Shrimflex Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m5">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>메가디럭스피자</h3>
+                        <img src="img/m5.png" alt="">
+                        <h3 class="h4">메가디럭스피자</h3>
                         <p>Mega Deluxe Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m6">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>페퍼로니피자</h3>
+                        <img src="img/m6.png" alt="">
+                        <h3 class="h4">페퍼로니피자</h3>
                         <p>Pepperoni Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m7">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>쉬림플렉스피자</h3>
+                        <img src="img/m7.png" alt="">
+                        <h3 class="h4">쉬림플렉스피자</h3>
                         <p>Shrimflex Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m8">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>더블불고기피자</h3>
+                        <img src="img/m8.png" alt="">
+                        <h3 class="h4">더블불고기피자</h3>
                         <p>Double Bulgogi Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m9">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>베이컨포테마요피자</h3>
+                        <img src="img/m9.png" alt="">
+                        <h3 class="h4">베이컨포테마요피자</h3>
                         <p>Bacon Potato Mayo Pizza</p>
                     </a>
                 </li>
-                <li>
+                <li class="m m10">
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
-                        <h3>슈퍼콤비네이션피자</h3>
+                        <img src="img/m10.png" alt="">
+                        <h3 class="h4">슈퍼콤비네이션피자</h3>
                         <p>Super Combination Pizza</p>
                     </a>
                 </li>
             </ul>
         </div>
     </section>
-    <section id="video"></section>
+    <!-- 프로모션 비디오 -->
+    <section id="video">
+        <div class="wrap">
+            <h2 class="h2">Promotion Video</h2>
+            <div class=""><iframe width="1214" height="683" src="https://www.youtube.com/embed/gkga7Oz90v0" title="프레드피자X비비, HEY FRED 맛 좀 보여줘!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        </div>
+    </section>
+    <!-- 흐르는 글자 -->
+     <section id="rolling">
+        <div class="r1">
+            <section class="promotion">
+                <p>THE MOST DELICIOUS CHOICE!</p>
+                <p>THE MOST DELICIOUS CHOICE!</p>
+            </section>
+            <section class="promotion">
+                <p>THE MOST DELICIOUS CHOICE!</p>
+                <p>THE MOST DELICIOUS CHOICE!</p>
+            </section>
+        </div>
+        <div class="r2">
+            <section class="promotion">
+                <p>THE MOST DELICIOUS CHOICE!</p>
+                <p>THE MOST DELICIOUS CHOICE!</p>
+            </section>
+            <section class="promotion">
+                <p>THE MOST DELICIOUS CHOICE!</p>
+                <p>THE MOST DELICIOUS CHOICE!</p>
+            </section>
+        </div>
+     </section>
+    <!-- 브랜드 스토리 -->
     <section id="story">
-        <div>
+        <div class="sAni">
             <ul>
                 <li>
-                    <h3>Brand Story</h3>
+                    <h3 class="h2">Brand Story</h3>
                     <p>
                         프레드 피자는 고객님의 일상을 행복으로 채워,
                         <span class="block"></span>
@@ -182,42 +237,51 @@
             </ul>
         </div>
     </section>
+    <!-- 가맹점 모집 -->
     <section id="family">
-        <div>
-            <h3></h3>
-            <p></p>
-            <a href="" class="block">자세히 보기</a>
-        </div>
+        <div class="wrap">
+            <div class="text">
+                <h3 class="h2">
+                    Be a Family
+                    <span class="block"></span>
+                    with Fred 
+                </h3>
+                <p class="h6">프레드와 가족이 될 가맹점 점주님을 모집합니다.</p>
+                <a href="" class="block">자세히 보기</a>
+            </div>
+            </div>
     </section>
+    <!-- 매장검색 -->
     <section id="search">
-        <div>
-            <h3>Search Store</h3>
-            <p>가까운 프레드 피자 매장을 검색해보세요!</p>
-            <a href="" class="block">자세히 보기</a>
+        <div class="wrap">
+            <h3 class="h2">Search Store</h3>
+            <p class="h6">가까운 프레드 피자 매장을 검색해보세요!</p>
+            <a href="" class="block">매장찾기 바로가기</a>
         </div>
     </section>
+    <!-- 이벤트 -->
     <section id="event">
         <div class="wrap">
-            <h3>Event</h3>
+            <h3 class="h2">Event</h3>
             <p>프레드 피자에서 진행중인 다양한 이벤트를 즐겨보세요!</p>
             <ul>
                 <li>
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
+                        <img src="" alt="">
                         <h4></h4>
                         <date></date>
                     </a>
                 </li>
                 <li>
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
+                        <img src="" alt="">
                         <h4></h4>
                         <date></date>
                     </a>
                 </li>
                 <li>
                     <a href="" class="block">
-                        <figure><img src="" alt=""></figure>
+                        <img src="" alt="">
                         <h4></h4>
                         <date></date>
                     </a>
@@ -226,6 +290,7 @@
             <a href="" class="block">이벤트 더보기</a>
         </div>
     </section>
+    <!-- 소식 -->
     <section id="news">
         <div>
             <div class="notice">
@@ -266,6 +331,7 @@
             </div>
         </div>
     </section>
+    <!-- 하단 영역 -->
     <footer>
         <div class="wrap">
 
