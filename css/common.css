@@ -1,23 +1,16 @@
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
 body{
-  font-family: 'Pretendard-Regular';
-  font-weight: 300;
+  font-family: pretendard;
 }
 .wrap{
   max-width: 1280px;
   margin: 0 auto;
 }
 /* 여백 */
-.paddingT20{
-  padding-top: 20px;
+.paddingT50{
+  padding-top: 50px;
 }
-.paddingB20{
-  padding-bottom: 20px;
+.paddingB50{
+  padding-bottom: 50px;
 }
 /* 정렬 */
 .flex{
@@ -29,7 +22,9 @@ body{
 .block{
   display: block;
 }
-
+.hide{
+  display: none;
+}
 /* 폰트사이즈 */
 .h1{
   font-size: 72px;
@@ -51,4 +46,47 @@ body{
 }
 .bold{
   font-weight: 900;
+}
+/* 버튼 스타일 */
+.btn{
+  width: fit-content;
+  padding: 20px 120px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px;
+  border: 2px solid #000;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn:hover{
+  color: #000 !important;
+}
+.btn::after{
+  content: "";
+  display: block;
+  width: 0;
+  height: 65px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+.btn:hover::after{
+  left: 0;
+  width: 100%;
+}
+.fixed{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+/* 헤더 디자인 */
+.whiteH{
+  
+}
+.redH{
+  
 }

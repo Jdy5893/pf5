@@ -1,37 +1,63 @@
 /* 상단 */
 header {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-  }
-  header div.wrap {
-    justify-content: space-between;
-    padding-top: 20px;
-  }
-  header div.wrap h1{  
-    margin: 0;
-  }
-  header div.wrap h1 a{
-    font-size: 0;
-    background-image: url(../img/logo.png);
-    width: 216px;
-    height: 50px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-  header div.wrap ul.gnb {
-    align-items: center;
-    margin-right: -40px;
-  }
-  header div.wrap ul.gnb li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+header div.wrap {
+  justify-content: space-between;
+  /*! padding-top: 20px; */
+  position: relative;
+}
+header div.wrap h1{  
+  margin: 0;
+}
+header div.wrap h1 a{
+  font-size: 0;
+  background-image: url(../img/logo.png);
+  width: 216px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 30px;
+}
+header div.wrap ul.gnb {
+  align-items: baseline;
+  margin-right: -40px;
+}
+header div.wrap ul.gnb li {
+  position: relative;
+}
+header div.wrap ul.gnb > li > a {
+  padding: 30px 40px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+header div.wrap ul.gnb li .sub{
+  width: 240px;
+  height: auto;
+  background-color: #fff;
+  color: #000 !important;
+  position: absolute;
+  border-radius: 5px;
+  left: 40px;
+  box-shadow: 1px 1px 8px #919191;
+}
+header div.wrap ul.gnb li .sub li{
   
-  }
-  header div.wrap ul.gnb li a {
-    padding: 10px 40px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
-  }
+}
+header div.wrap ul.gnb > li .sub > li > a{
+  color: #000 !important;
+  font-size: 16px;
+  padding: 25px 20px;
+}
+header div.wrap ul.gnb > li .sub li:hover a{
+  color: red!important;
+}
+header div.wrap .ham{
+  display: none;
+}

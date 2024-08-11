@@ -14,29 +14,114 @@
     <!-- 폰트 -->
 
     <link href="https://fonts.cdnfonts.com/css/mont?styles=21818,21819" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+
                 
-                
-    <!-- 슬릭 -->
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- 자바스크립트 -->
     <script src="js/jquery-3.7.1.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
         $(document).ready(function(){
+            $("header .sub").hide();
+            let h;
+            $("header div.wrap ul.gnb > li").hover(
+                function(){
+                    h=$(this).index()+1;
+                    $("header div.wrap ul.gnb > li:nth-child("+h+") .sub").stop().fadeIn();
+                },
+                function(){
+                    $("header div.wrap ul.gnb > li:nth-child("+h+") .sub").hide();
+                }
+            );
+            //슬릭 진행바
+            var $slider = $('.titleAni');
+            var $progressBar = $('.progress-bar');
+            var slideCount = null;
+
+            $slider.on('init', function(event, slick){
+                slideCount = slick.slideCount;
+                setProgress(0);
+            });
+
+            $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+                setProgress(nextSlide);
+            });
+            //타이틀 이미지 애니
             $(".titleAni").slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 autoplay: true,
-                autoplaySpeed: 2000,
-                dots: false,
+                autoplaySpeed: 3000,
+                dots: true,
                 infinite: true,
-                speed: 1500,
+                speed: 500,
                 cssEase: 'ease-out',
                 arrows: true,
-                fade: false
+                fade: false,
+                asNavFor: ".textAni"
+                
+                
             });
+
+            //타이틀 글자 슬릭
+            $(".textAni").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: false,
+                infinite: true,
+                speed: 500,
+                cssEase: 'ease-out',
+                arrows: false,
+                fade: true,
+                asNavFor: ".titleAni"
+                
+            });
+
+            function setProgress(index) {
+                var calc = ((index + 1) / slideCount) * 100;
+                $progressBar.css('width', calc + '%');
+            }
+
+            //도트를 숫자로 변경
+            let num = $("#title .slick-dots li").length;
+            let current = $("#title ul li.slick-active").index();
+            $("#title").append('<span class="number"><strong>0' + (current+1) + '</strong>0'+num+'</span>');
+
+            //버튼 클릭하면 숫자 변화 
+            $("#title .slick-next,#title .slick-prev").click(function(){
+                current = $("#title ul li.slick-active").index();
+                $("#title span.number strong").text('0'+ (current+1));
+            });
+
+            //슬릭 진행바
+            const title = $(".titleAni");
+            const progress = $(".progress");
+            const initPercent = 100 / ($(".titleAni").find('.slick-dots li').length);
+
+            progress.css('background-size', initPercent + '% 100%');
+
+            title.on('beforeChange', function(event, slick, currentSlide, nextSlide){
+                var calc = ((nextSlide) / slick.slideCount-1) * 100;
+                progress
+                    .css('background-size', calc + initPercent + '% 100%')
+                    .attr('aria-valuenow', calc + initPercent );
+            });
+
             //슬릭버튼 위치 이동
-            $("#title .titleAni button").wrapAll("<div class='wbutton'></div>");
+            $(".titleAni .slick-prev,.titleAni .slick-next, span.number, .wprogress-bar").wrapAll("<div class='wbutton'></div>");
+
+            // 버튼 클릭 이벤트로 두 슬라이더 동기화
+            // $('.titleAni .slick-next').on('click', function() {
+            //     $('.titleAni').slick('slickNext');
+            //     $('.textAni').slick('slickNext');
+            // });
 
             $(".menuAni").slick({
                 slidesToShow: 4.3,
@@ -48,10 +133,79 @@
                 speed: 1500,
                 cssEase: 'ease-out',
                 arrows: true,
-                fade: false
+                fade: false,
+                initialSlide: 1,
+                responsive: [
+                    {
+                    breakpoint: 1201,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: true
+                    }
+                    },
+                    {
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        vertical : true,
+                        verticalSwiping: true
+                    }
+                    }
+                ]
             });
-
-
+            $(".sAni").slick({
+                slidesToShow: 3.3,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                dots: false,
+                infinite: true,
+                speed: 1500,
+                cssEase: 'ease-out',
+                arrows: true,
+                fade: false,
+                adaptiveHight: true
+                
+            });
+            //어사이드 top버튼
+            $("aside button").click(function(){
+                $("html,body").animate({scrollTop:0},1000);
+            });
+            //창 스크롤시 top버튼 나오게
+            var bmT =$("#bestMenu .menu").offset().top;
+            var ws;
+            $(window).scroll(function(){
+                ws = $(window).scrollTop();
+                if(ws>bmT){
+                    $("aside").addClass("right");
+                }
+                if(ws<bmT){
+                    $("aside").removeClass("right");
+                }
+            });
+            //스크롤시 헤더 고정
+            var bmT = $("#bestMenu").offset().top;
+            var ws;
+            $(window).scroll(function(){
+                ws = $(window).scrollTop();
+                if(ws>bmT){
+                    $("header").addClass("fixed");
+                    $("header").css("background-color","#fff");
+                    $("header div.wrap h1 a").css("background-image","url(img/redlogo.png)");
+                    $("header div.wrap ul.gnb > li a").css("color","#000");
+                }
+                if(ws<bmT){
+                    $("header").removeClass("fixed");
+                    $("header").css("background-color","transparent");
+                    $("header div.wrap h1 a").css("background-image","url(img/logo.png)");
+                    $("header div.wrap ul.gnb > li a").css("color","#fff");
+                }
+            });
+            
         });
     </script>
     
@@ -63,49 +217,93 @@
         <div class="wrap flex">
             <h1><a href="" class="block">FRED PIZZA</a></h1>
             <ul class="gnb flex">
-                <li><a href="" class="block">브랜드</a></li>
-                <li><a href="" class="block">메뉴</a></li>
-                <li><a href="" class="block">매장</a></li>
-                <li><a href="" class="block">뉴스</a></li>
-                <li><a href="" class="block">창업</a></li>
+                <li>
+                    <a href="" class="block">브랜드</a>
+                    <ul class="sub">
+                        <li><a href="" class="block">브랜드 스토리</a></li>
+                        <li><a href="" class="block">연혁</a></li>
+                        <li><a href="" class="block">오시는 길</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="" class="block">메뉴</a>
+                    <ul class="sub">
+                        <li><a href="" class="block">피자</a></li>
+                        <li><a href="" class="block">사이드</a></li>
+                        <li><a href="" class="block">세트</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="" class="block">매장</a>
+                    <ul class="sub">
+                        <li><a href="" class="block">매장 찾기</a></li>
+                        <li><a href="" class="block">우수 가맹점</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="" class="block">뉴스</a>
+                    <ul class="sub">
+                        <li><a href="" class="block">새소식</a></li>
+                        <li><a href="" class="block">이벤트</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="" class="block">창업</a>
+                    <ul class="sub">
+                        <li><a href="" class="block">창업 경쟁력</a></li>
+                        <li><a href="" class="block">창업 안내</a></li>
+                        <li><a href="" class="block">창업비용 및 절차</a></li>
+                        <li><a href="" class="block">가맹 FAQ</a></li>
+                        <li><a href="" class="block">창업문의</a></li>
+                    </ul>
+                </li>
             </ul>
+            <button class="ham">메뉴</button>
         </div>
     </header>
     <!-- 타이틀 영역 -->
     <div id="title">
         <div class="titleAni">
-            <div class="timg t1">
-                <div class="wrap">
-                    <h2 class="h1 bold">
-                        꽉 찬 토핑!
-                        <span class="block"></span>
-                        이러니까 아무도
-                        <span class="block"></span>
-                        못 비비지!
-                    </h2>
-                    <p class="h5">있었지만 없었던 피자, 프레드 피자!</p>
-                </div>
+            <div class="timg t1"></div>
+            <div class="timg t2"></div>
+        </div>
+        <div class="wrap textAni">
+            <div class="text te1">
+                <h2 class="h1 bold">
+                    꽉 찬 토핑!
+                    <span class="block"></span>
+                    이러니까 아무도
+                    <span class="block"></span>
+                    못 비비지!
+                </h2>
+                <p class="h6">있었지만 없었던 피자, 프레드 피자!</p>
             </div>
-            <div class="timg t2">
-                <div class="wrap">
-                    <h2 class="h1 bold">
-                        미트X미트X미트!
-                        <span class="block"></span>
-                        극강의 미트 토핑
-                        <span class="block"></span>
-                        메가디럭스피자
-                    </h2>
-                    <p class="h5">육즙 가득한 고기와 신선한 야채의 조화</p>
-                </div>
+            <div class="text te2">
+                <h2 class="h1 bold">
+                    미트X미트X미트!
+                    <span class="block"></span>
+                    극강의 미트 토핑
+                    <span class="block"></span>
+                    메가디럭스피자
+                </h2>
+                <p class="h6">육즙 가득한 고기와 신선한 야채의 조화</p>
             </div>
         </div>
+        <div class="wprogress-bar">
+            <div class="progress-bar"></div>
+        </div>
     </div>
+    <!-- 어사이드 -->
+    <aside class="">
+        <button>Top</button>
+        <a href="" class="block h6">가맹문의</a>
+    </aside>
     <!-- 메인 영역 -->
      <!-- 베스트메뉴 -->
     <section id="bestMenu">
         <div class="menu flex">
             <h2 class="h2">Fred Best Menu</h2>
-            <ul class="menuAni">
+            <ul class="menuAni" data-aos="fade-up">
                 <li class="m m1">
                     <a href="" class="block">
                         <img src="img/m1.png" alt="">
@@ -122,7 +320,7 @@
                 </li>
                 <li class="m m3">
                     <a href="" class="block">
-                        <img src="img/m3.jpg" alt="">
+                        <img src="img/m3.png" alt="">
                         <h3 class="h4">쿼터치즈벅피자</h3>
                         <p>Quater Cheesebuck Pizza</p>
                     </a>
@@ -183,12 +381,12 @@
     <section id="video">
         <div class="wrap">
             <h2 class="h2">Promotion Video</h2>
-            <div class=""><iframe width="1214" height="683" src="https://www.youtube.com/embed/gkga7Oz90v0" title="프레드피자X비비, HEY FRED 맛 좀 보여줘!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+            <div class="" data-aos="fade-up" data-aos-duration="1000" data-aos-once="false"><iframe width="1214" height="683" src="https://www.youtube.com/embed/gkga7Oz90v0" title="프레드피자X비비, HEY FRED 맛 좀 보여줘!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         </div>
     </section>
     <!-- 흐르는 글자 -->
-     <section id="rolling">
-        <div class="r1">
+     <section id="rolling" data-aos="fade-up">
+        <div class="r1" data-aos="fade" data-aos-duration="1000" data-aos-once="false">
             <section class="promotion">
                 <p>THE MOST DELICIOUS CHOICE!</p>
                 <p>THE MOST DELICIOUS CHOICE!</p>
@@ -198,7 +396,7 @@
                 <p>THE MOST DELICIOUS CHOICE!</p>
             </section>
         </div>
-        <div class="r2">
+        <div class="r2" data-aos="fade" data-aos-duration="1000" data-aos-once="false">
             <section class="promotion">
                 <p>THE MOST DELICIOUS CHOICE!</p>
                 <p>THE MOST DELICIOUS CHOICE!</p>
@@ -211,28 +409,51 @@
      </section>
     <!-- 브랜드 스토리 -->
     <section id="story">
-        <div class="sAni">
-            <ul>
-                <li>
-                    <h3 class="h2">Brand Story</h3>
-                    <p>
-                        프레드 피자는 고객님의 일상을 행복으로 채워,
-                        <span class="block"></span>
-                        가장 최고의 순간이 될 수 있도록 함께 합니다.
-                    </p>
-                    <a href="" class="block">자세히 보기</a>
+        <div class="s">
+            <ul class="sAni">
+                <li class="s1">
+                    <div class="flex bs">
+                        <h3 class="h2">Brand Story</h3>
+                        <p class="h6">
+                            프레드 피자는 고객님의 일상을 행복으로 채워,
+                            <span class="block"></span>
+                            가장 최고의 순간이 될 수 있도록 함께 합니다.
+                        </p>
+                        <a href="" class="block btn">자세히 보기</a>
+                    </div>
                 </li>
-                <li>
-                    <strong>Happiness</strong>
-                    <p>건강하고, 행복한 삶을 위해 노력합니다.</p>
+                <li class="s2">
+                    <div>
+                        <figure>
+                            <img src="img/s1.png" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong class="h3">Happiness</strong>
+                            <p>건강하고, 행복한 삶을 위해 노력합니다.</p>
+                        </div>
+                    </div>
                 </li>
-                <li>
-                    <strong>Trust</strong>
-                    <p>투명 경영을 통해 신뢰를 기반으로 상생합니다.</p>
+                <li class="s3">
+                    <div>
+                        <figure>
+                            <img src="img/s2.png" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong class="h3">Trust</strong>
+                            <p>투명 경영을 통해 신뢰를 기반으로 상생합니다.</p>
+                        </div>
+                    </div>
                 </li>
-                <li>
-                    <strong>Customer</strong>
-                    <p>항상 고객님을 먼저 생각하며, 최고를 추구합니다.</p>
+                <li class="s4">
+                    <div>
+                        <figure>
+                            <img src="img/s3.png" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong class="h3">Customer</strong>
+                            <p>항상 고객님을 먼저 생각하며, 최고를 추구합니다.</p>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -247,85 +468,109 @@
                     with Fred 
                 </h3>
                 <p class="h6">프레드와 가족이 될 가맹점 점주님을 모집합니다.</p>
-                <a href="" class="block">자세히 보기</a>
+                <a href="" class="block btn">자세히 보기</a>
             </div>
             </div>
     </section>
     <!-- 매장검색 -->
     <section id="search">
         <div class="wrap">
-            <h3 class="h2">Search Store</h3>
-            <p class="h6">가까운 프레드 피자 매장을 검색해보세요!</p>
-            <a href="" class="block">매장찾기 바로가기</a>
+            <h3 class="h2" data-aos="fade-down" data-aos-duration="1000">Search Store</h3>
+            <p class="h6" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="200">가까운 프레드 피자 매장을 검색해보세요!</p>
+            <a href="" class="block" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">매장찾기 바로가기</a>
         </div>
     </section>
     <!-- 이벤트 -->
     <section id="event">
-        <div class="wrap">
-            <h3 class="h2">Event</h3>
-            <p>프레드 피자에서 진행중인 다양한 이벤트를 즐겨보세요!</p>
-            <ul>
-                <li>
+        <div class="wrap  paddingT50 paddingB50">
+            <h3 class="h2" data-aos="fade-down" data-aos-duration="1000">Event</h3>
+            <p class="h6" data-aos="fade-down" data-aos-delay="300" data-aos-duration="500">프레드 피자에서 진행중인 다양한 이벤트를 즐겨보세요!</p>
+            <ul class="list">
+                <li data-aos="fade-down" data-aos-delay="600" data-aos-duration="500">
                     <a href="" class="block">
-                        <img src="" alt="">
-                        <h4></h4>
-                        <date></date>
+                        <figure>
+                            <img src="img/e1.png" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong>[Event] 배민 브랜드관 할인 이벤트, 매주 수/목 전메뉴 3,000원 할인!</strong>
+                            <date>24.02.01~</date>
+                        </div>
                     </a>
                 </li>
-                <li>
+                <li data-aos="fade-down" data-aos-delay="900" data-aos-duration="500">
                     <a href="" class="block">
-                        <img src="" alt="">
-                        <h4></h4>
-                        <date></date>
+                        <figure>
+                            <img src="img/e2.jpg" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong>[Event] 비비(BIBI) 포토카드 증정 리뷰 이벤트</strong>
+                            <date>24.03.08~</date>
+                        </div>
                     </a>
                 </li>
-                <li>
+                <li data-aos="fade-down" data-aos-delay="1200" data-aos-duration="500">
                     <a href="" class="block">
-                        <img src="" alt="">
-                        <h4></h4>
-                        <date></date>
+                        <figure>
+                            <img src="img/e3.jpg" alt="">
+                        </figure>
+                        <div class="text">
+                            <strong>[Event] 배민앱 리뷰 이벤트, 리뷰 남기고 서비스 받자!</strong>
+                            <date>24.01.01~</date>
+                        </div>
                     </a>
                 </li>
             </ul>
-            <a href="" class="block">이벤트 더보기</a>
+            <a href="" class="block btn">이벤트 더보기</a>
         </div>
     </section>
     <!-- 소식 -->
     <section id="news">
-        <div>
+        <div class="wrap" data-aos="fade-down">
             <div class="notice">
-                <h3></h3>
+                <h3 class="h3">Notice</h3>
                 <a href="" class="block">더보기</a>
                 <ul>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>프레드피자 첫 전속모델 '비비(BIBI)' 선정</p>
+                            <time>2024.02.05.</time>
+                        </a>
                     </li>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>프레드피자 신메뉴 3종 출시</p>
+                            <time>2024.02.05.</time>
+                        </a>
                     </li>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>한달간 BIG 창업 프로모션 지원</p>
+                            <time>2024.02.05.</time>
+                        </a>
                     </li>
                 </ul>
             </div>
             <div class="news">
-                <h3></h3>
+                <h3 class="h3">News</h3>
                 <a href="" class="block">더보기</a>
                 <ul>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>프레드피자, 가맹점 상생경영 실천… 우수가맹점 물류예...</p>
+                            <time>2024.04.25.</time>
+                        </a>
                     </li>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>프레드피자, 비비광고 공개 한달만에 1000만뷰···월매출...</p>
+                            <time>2024.04.23.</time>
+                        </a>
                     </li>
                     <li>
-                        <p></p>
-                        <date></date>
+                        <a href="" class="block">
+                            <p>피자 프랜차이즈 프레드피자, 파격 창업 혜택 지원...창업...</p>
+                            <time>2024.03.08.</time>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -333,9 +578,32 @@
     </section>
     <!-- 하단 영역 -->
     <footer>
-        <div class="wrap">
-
+        <div class="wrap grid">
+            <ul class="fnb">
+                <li><a href="" class="block">개인정보처리방침</a></li>
+                <li><a href="" class="block">이메일 무단 수집 거부</a></li>
+            </ul>
+            <div class="address flex">
+                <p>프레드피자(주)</p>
+                <p>대표이사: 강태성</p>
+                <p>사업자등록번호: 891-88-02080</p>
+                <p>부산광역시 남구 진남로 29번길 28 프레드피자</p>
+                <p>이메일: fredpizza_official@naver.com</p>
+                <p>마케팅 협업 제안: fredpizza.creative@gmail.com</p>
+                <p>가맹문의 및 고객지원: 1811-9809</p>
+            </div>
+            <p class="copyright">Copyright ©프레드피자(주) All Rights Reserved.</p>
+            <ul class="sns">
+                <li><a href="" class="block">인스타그램</a></li>
+                <li><a href="" class="block">페이스북</a></li>
+                <li><a href="" class="block">카카오톡</a></li>
+                <li><a href="" class="block">유튜브</a></li>
+            </ul>
         </div>
     </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
