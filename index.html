@@ -16,10 +16,6 @@
     <link href="https://fonts.cdnfonts.com/css/mont?styles=21818,21819" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-
-                
-    <!-- aos -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- 자바스크립트 -->
     <script src="js/jquery-3.7.1.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -51,6 +47,7 @@
             $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide){
                 setProgress(nextSlide);
             });
+            
             //타이틀 이미지 애니
             $(".titleAni").slick({
                 slidesToShow: 1,
@@ -116,12 +113,6 @@
 
             //슬릭버튼 위치 이동
             $(".titleAni .slick-prev,.titleAni .slick-next, span.number, .wprogress-bar").wrapAll("<div class='wbutton'></div>");
-
-            // 버튼 클릭 이벤트로 두 슬라이더 동기화
-            // $('.titleAni .slick-next').on('click', function() {
-            //     $('.titleAni').slick('slickNext');
-            //     $('.textAni').slick('slickNext');
-            // });
 
             $(".menuAni").slick({
                 slidesToShow: 4.3,
@@ -209,6 +200,14 @@
         });
     </script>
     
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function(){
+            AOS.init();
+        });
+    </script>
 
 </head>
 <body>
@@ -601,9 +600,5 @@
             </ul>
         </div>
     </footer>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
 </body>
 </html>
